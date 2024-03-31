@@ -2,8 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/src/DND_Spells/.vs
-/src/DND_Spells/SpellsDomain/bin/Debug/net8.0
-/src/DND_Spells/SpellsInfrasturcture/bin/Debug/net8.0
-/src/DND_Spells/SpellsDomain/obj
-/src/DND_Spells/SpellsInfrasturcture/obj
+.vs
+*.suo
+*.user
+bin
+obj
+packages
+

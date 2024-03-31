@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpellsMVC", "SpellsMVC", "{05EC7CD7-F3BA-4F2F-82B4-84EFC8E0C8FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellsDomain", "SpellsDomain\SpellsDomain.csproj", "{DACF2BFF-598B-4FBF-948A-998E94688FF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpellsInfrasturcture", "SpellsInfrasturcture\SpellsInfrasturcture.csproj", "{829D3598-368E-44C3-ADFE-A62CF94A1C45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DACF2BFF-598B-4FBF-948A-998E94688FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACF2BFF-598B-4FBF-948A-998E94688FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACF2BFF-598B-4FBF-948A-998E94688FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACF2BFF-598B-4FBF-948A-998E94688FF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829D3598-368E-44C3-ADFE-A62CF94A1C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829D3598-368E-44C3-ADFE-A62CF94A1C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829D3598-368E-44C3-ADFE-A62CF94A1C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829D3598-368E-44C3-ADFE-A62CF94A1C45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE5860B6-7761-4C7D-8308-12D52159433C}
+	EndGlobalSection
+EndGlobal
