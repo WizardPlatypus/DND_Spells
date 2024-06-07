@@ -11,7 +11,7 @@ public partial class User : Entity
 
     public string Hash { get; set; } = null!;
 
-    public byte StatusId { get; set; }
+    public int StatusId { get; set; }
 
     public virtual Status Status { get; set; } = null!;
 }

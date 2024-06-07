@@ -7,7 +7,7 @@ public partial class Area : Entity
 {
     public int AreaId { get; set; }
 
-    public byte AreaTypeId { get; set; }
+    public int AreaTypeId { get; set; }
 
     public int AreaSize { get; set; }
 

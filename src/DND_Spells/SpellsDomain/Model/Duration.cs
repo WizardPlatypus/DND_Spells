@@ -7,7 +7,7 @@ public partial class Duration : Entity
 {
     public int DurationId { get; set; }
 
-    public byte DurationTypeId { get; set; }
+    public int DurationTypeId { get; set; }
 
     public bool Concentration { get; set; }
 

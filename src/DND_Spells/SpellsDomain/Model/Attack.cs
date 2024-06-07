@@ -7,7 +7,7 @@ public partial class Attack : Entity
 {
     public int SpellId { get; set; }
 
-    public byte AttackTypeId { get; set; }
+    public int AttackTypeId { get; set; }
 
     public virtual AttackType AttackType { get; set; } = null!;
 

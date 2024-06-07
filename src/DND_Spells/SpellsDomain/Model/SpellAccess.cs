@@ -5,7 +5,7 @@ namespace SpellsDomain.Model;
 
 public partial class SpellAccess : Entity
 {
-    public byte ClassId { get; set; }
+    public int ClassId { get; set; }
 
     public int SpellId { get; set; }
 

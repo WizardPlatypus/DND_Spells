@@ -9,9 +9,9 @@ public partial class Spell : Entity
 
     public int BookId { get; set; }
 
-    public byte SchoolId { get; set; }
+    public int SchoolId { get; set; }
 
-    public byte Level { get; set; }
+    public int Level { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -19,11 +19,11 @@ public partial class Spell : Entity
 
     public bool Ritual { get; set; }
 
-    public byte CastingTimeTypeId { get; set; }
+    public int CastingTimeTypeId { get; set; }
 
     public int? DurationId { get; set; }
 
-    public byte RangeTypeId { get; set; }
+    public int RangeTypeId { get; set; }
 
     public int? AreaId { get; set; }
 
@@ -31,7 +31,7 @@ public partial class Spell : Entity
 
     public bool Somatic { get; set; }
 
-    public byte Material { get; set; }
+    public int Material { get; set; }
 
     public virtual Area? Area { get; set; }
 

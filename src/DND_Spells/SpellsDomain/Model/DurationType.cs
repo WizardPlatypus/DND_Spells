@@ -5,7 +5,7 @@ namespace SpellsDomain.Model;
 
 public partial class DurationType : Entity
 {
-    public byte DurationTypeId { get; set; }
+    public int DurationTypeId { get; set; }
 
     public int Value { get; set; }
 

@@ -5,7 +5,7 @@ namespace SpellsDomain.Model;
 
 public partial class AreaType : Entity
 {
-    public byte AreaTypeId { get; set; }
+    public int AreaTypeId { get; set; }
 
     public string Label { get; set; } = null!;
 

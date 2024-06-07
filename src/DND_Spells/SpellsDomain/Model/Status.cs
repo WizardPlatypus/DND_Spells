@@ -5,7 +5,7 @@ namespace SpellsDomain.Model;
 
 public partial class Status : Entity
 {
-    public byte StatusId { get; set; }
+    public int StatusId { get; set; }
 
     public string Label { get; set; } = null!;
 

@@ -5,7 +5,7 @@ namespace SpellsDomain.Model;
 
 public partial class RangeType : Entity
 {
-    public byte RangeTypeId { get; set; }
+    public int RangeTypeId { get; set; }
 
     public int Value { get; set; }
 
