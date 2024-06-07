@@ -5,8 +5,6 @@ namespace SpellsDomain.Model;
 
 public partial class Spell : Entity
 {
-    public int SpellId { get; set; }
-
     public int BookId { get; set; }
 
     public int SchoolId { get; set; }

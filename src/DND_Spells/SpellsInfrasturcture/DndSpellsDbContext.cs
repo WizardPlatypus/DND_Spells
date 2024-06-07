@@ -64,7 +64,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Area");
 
-            entity.Property(e => e.AreaId).HasColumnName("area_id");
+            entity.Property(e => e.Id).HasColumnName("area_id");
             entity.Property(e => e.AreaSize).HasColumnName("area_size");
             entity.Property(e => e.AreaTypeId).HasColumnName("area_type_id");
 
@@ -78,7 +78,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Area-Type");
 
-            entity.Property(e => e.AreaTypeId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("area_type_id");
             entity.Property(e => e.Label)
@@ -109,7 +109,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Attack-Type");
 
-            entity.Property(e => e.AttackTypeId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("attack_type_id");
             entity.Property(e => e.Label)
@@ -120,7 +120,7 @@ public partial class DndSpellsDbContext : DbContext
 
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.Property(e => e.BookId).HasColumnName("book_id");
+            entity.Property(e => e.Id).HasColumnName("book_id");
             entity.Property(e => e.Short)
                 .HasMaxLength(20)
                 .IsUnicode(false)
@@ -135,7 +135,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Casting-Time-Type");
 
-            entity.Property(e => e.CastingTimeTypeId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("casting_time_type_id");
             entity.Property(e => e.Label)
@@ -149,7 +149,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Class");
 
-            entity.Property(e => e.ClassId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("class_id");
             entity.Property(e => e.Label)
@@ -162,7 +162,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Duration");
 
-            entity.Property(e => e.DurationId).HasColumnName("duration_id");
+            entity.Property(e => e.Id).HasColumnName("duration_id");
             entity.Property(e => e.Concentration).HasColumnName("concentration");
             entity.Property(e => e.Dismissable).HasColumnName("dismissable");
             entity.Property(e => e.DurationTypeId).HasColumnName("duration_type_id");
@@ -177,7 +177,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Duration-Type");
 
-            entity.Property(e => e.DurationTypeId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("duration_type_id");
             entity.Property(e => e.Label)
@@ -192,7 +192,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.HasNoKey();
 
             entity.Property(e => e.EffectTypeId).HasColumnName("effect_type_id");
-            entity.Property(e => e.SpellId).HasColumnName("spell_id");
+            entity.Property(e => e.Id).HasColumnName("spell_id");
 
             entity.HasOne(d => d.EffectType).WithMany()
                 .HasForeignKey(d => d.EffectTypeId)
@@ -200,7 +200,7 @@ public partial class DndSpellsDbContext : DbContext
                 .HasConstraintName("FK_Effects_Effect-Type");
 
             entity.HasOne(d => d.Spell).WithMany()
-                .HasForeignKey(d => d.SpellId)
+                .HasForeignKey(d => d.Id)
                 .HasConstraintName("FK_Effects_Spells");
         });
 
@@ -208,7 +208,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Effect-Type");
 
-            entity.Property(e => e.EffectTypeId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("effect_type_id");
             entity.Property(e => e.Label)
@@ -242,7 +242,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Material-Type");
 
-            entity.Property(e => e.MaterialTypeId).HasColumnName("material_type_id");
+            entity.Property(e => e.Id).HasColumnName("material_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -253,7 +253,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Range-Type");
 
-            entity.Property(e => e.RangeTypeId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("range_type_id");
             entity.Property(e => e.Label)
@@ -265,11 +265,11 @@ public partial class DndSpellsDbContext : DbContext
 
         modelBuilder.Entity<SchoolOfMagic>(entity =>
         {
-            entity.HasKey(e => e.SchoolId);
+            entity.HasKey(e => e.Id);
 
             entity.ToTable("School-of-Magic");
 
-            entity.Property(e => e.SchoolId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("school_id");
             entity.Property(e => e.Label)
@@ -282,7 +282,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.HasIndex(e => e.AreaId, "UQ_Spells_area-id").IsUnique();
 
-            entity.Property(e => e.SpellId).HasColumnName("spell_id");
+            entity.Property(e => e.Id).HasColumnName("spell_id");
             entity.Property(e => e.AreaId).HasColumnName("area_id");
             entity.Property(e => e.BookId).HasColumnName("book_id");
             entity.Property(e => e.CastingTimeTypeId).HasColumnName("casting_time_type_id");
@@ -359,7 +359,7 @@ public partial class DndSpellsDbContext : DbContext
         {
             entity.ToTable("Status");
 
-            entity.Property(e => e.StatusId)
+            entity.Property(e => e.Id)
                 //.ValueGeneratedOnAdd()
                 .HasColumnName("status_id");
             entity.Property(e => e.Label)
@@ -370,7 +370,7 @@ public partial class DndSpellsDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.Id).HasColumnName("user_id");
             entity.Property(e => e.Hash)
                 .HasMaxLength(200)
                 .IsUnicode(false)

@@ -5,8 +5,6 @@ namespace SpellsDomain.Model;
 
 public partial class User : Entity
 {
-    public int UserId { get; set; }
-
     public string Login { get; set; } = null!;
 
     public string Hash { get; set; } = null!;

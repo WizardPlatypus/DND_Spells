@@ -5,8 +5,6 @@ namespace SpellsDomain.Model;
 
 public partial class Book : Entity
 {
-    public int BookId { get; set; }
-
     public string Title { get; set; } = null!;
 
     public string Short { get; set; } = null!;

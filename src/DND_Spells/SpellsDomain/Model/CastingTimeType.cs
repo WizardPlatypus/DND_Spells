@@ -5,8 +5,6 @@ namespace SpellsDomain.Model;
 
 public partial class CastingTimeType : Entity
 {
-    public int CastingTimeTypeId { get; set; }
-
     public int Value { get; set; }
 
     public string Label { get; set; } = null!;
