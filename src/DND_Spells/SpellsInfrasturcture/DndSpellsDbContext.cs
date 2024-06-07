@@ -79,12 +79,13 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Area-Type");
 
             entity.Property(e => e.AreaTypeId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("area_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("label");
+
         });
 
         modelBuilder.Entity<Attack>(entity =>
@@ -109,7 +110,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Attack-Type");
 
             entity.Property(e => e.AttackTypeId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("attack_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(20)
@@ -135,7 +136,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Casting-Time-Type");
 
             entity.Property(e => e.CastingTimeTypeId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("casting_time_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(50)
@@ -149,7 +150,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Class");
 
             entity.Property(e => e.ClassId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("class_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(20)
@@ -177,7 +178,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Duration-Type");
 
             entity.Property(e => e.DurationTypeId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("duration_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(50)
@@ -208,7 +209,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Effect-Type");
 
             entity.Property(e => e.EffectTypeId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("effect_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(50)
@@ -253,7 +254,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Range-Type");
 
             entity.Property(e => e.RangeTypeId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("range_type_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(50)
@@ -269,7 +270,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("School-of-Magic");
 
             entity.Property(e => e.SchoolId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("school_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(20)
@@ -359,7 +360,7 @@ public partial class DndSpellsDbContext : DbContext
             entity.ToTable("Status");
 
             entity.Property(e => e.StatusId)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
                 .HasColumnName("status_id");
             entity.Property(e => e.Label)
                 .HasMaxLength(10)
