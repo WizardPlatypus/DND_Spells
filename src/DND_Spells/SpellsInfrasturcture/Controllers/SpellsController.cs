@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using SpellsDomain.Model;
 using SpellsInfrasturcture;
@@ -53,12 +54,37 @@ namespace SpellsInfrasturcture.Controllers
         // GET: Spells/Create
         public IActionResult Create()
         {
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Id");
+            ViewData["AreaId"] = new SelectList(_context.Areas.Select(a => new
+            {
+                a.Id,
+                Area = _context.AreaTypes.Where(t => t.Id == a.AreaTypeId).First().Label + ", " + a.AreaSize + " feet"
+            }).ToList(), "Id", "Area");
+
             ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short");
-            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes, "Id", "Label");
-            ViewData["DurationId"] = new SelectList(_context.Durations, "Id", "Id");
-            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes, "Id", "Label");
-            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "SchoolId", "Label");
+
+            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes.Select(c => new
+            {
+                c.Id,
+                CastingTime = c.Value + " " + c.Label
+            }).ToList(), "Id", "CastingTime");
+
+            ViewData["DurationId"] = new SelectList(_context.Durations.Select(d => new
+            {
+                d.Id,
+                Duration = (from type in _context.DurationTypes
+                            where type.Id == d.DurationTypeId
+                            select (type.Value + " " + type.Label)).First()
+
+            }).ToList(), "Id", "Duration");
+
+            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes.Select(r => new
+            {
+                r.Id,
+                Range = r.Value + " " + r.Label
+            }).ToList(), "Id", "Range");
+
+            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "Id", "Label");
+
             return View();
         }
 
@@ -69,18 +95,56 @@ namespace SpellsInfrasturcture.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SpellId,BookId,SchoolId,Level,Name,Description,Ritual,CastingTimeTypeId,DurationId,RangeTypeId,AreaId,Verbal,Somatic,Material,Id")] Spell spell)
         {
+            spell.Duration = _context.Durations.First(d => d.Id == spell.DurationId);
+            spell.Duration.DurationType = _context.DurationTypes.First(e => e.Id == spell.Duration.DurationTypeId);
+            spell.School = _context.SchoolOfMagics.First(s => s.Id == spell.SchoolId);
+            spell.Area = _context.Areas.First(e => e.Id == spell.AreaId);
+            spell.Area.AreaType = _context.AreaTypes.First(e => e.Id == spell.Area.AreaTypeId);
+            spell.Book = _context.Books.First(e => e.Id == spell.BookId);
+            spell.CastingTimeType = _context.CastingTimeTypes.First(e => e.Id == spell.CastingTimeTypeId);
+            spell.RangeType = _context.RangeTypes.First(e => e.Id == spell.RangeTypeId);
+
+            ModelState.Clear();
+            TryValidateModel(spell);
+
             if (ModelState.IsValid)
             {
                 _context.Add(spell);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Id", spell.AreaId);
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short", spell.BookId);
-            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes, "Id", "Label", spell.CastingTimeTypeId);
-            ViewData["DurationId"] = new SelectList(_context.Durations, "Id", "Id", spell.DurationId);
-            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes, "Id", "Label", spell.RangeTypeId);
-            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "SchoolId", "Label", spell.SchoolId);
+
+            ViewData["AreaId"] = new SelectList(_context.Areas.Select(a => new
+            {
+                a.Id,
+                Area = _context.AreaTypes.Where(t => t.Id == a.AreaTypeId).First().Label + ", " + a.AreaSize + " feet"
+            }).ToList(), "Id", "Area");
+
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short");
+
+            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes.Select(c => new
+            {
+                c.Id,
+                CastingTime = c.Value + " " + c.Label
+            }).ToList(), "Id", "CastingTime");
+
+            ViewData["DurationId"] = new SelectList(_context.Durations.Select(d => new
+            {
+                d.Id,
+                Duration = (from type in _context.DurationTypes
+                            where type.Id == d.DurationTypeId
+                            select (type.Value + " " + type.Label)).First()
+
+            }).ToList(), "Id", "Duration");
+
+            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes.Select(r => new
+            {
+                r.Id,
+                Range = r.Value + " " + r.Label
+            }).ToList(), "Id", "Range");
+
+            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "Id", "Label");
+
             return View(spell);
         }
 
@@ -97,12 +161,45 @@ namespace SpellsInfrasturcture.Controllers
             {
                 return NotFound();
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Id", spell.AreaId);
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short", spell.BookId);
-            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes, "Id", "Label", spell.CastingTimeTypeId);
-            ViewData["DurationId"] = new SelectList(_context.Durations, "Id", "Id", spell.DurationId);
-            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes, "Id", "Label", spell.RangeTypeId);
-            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "SchoolId", "Label", spell.SchoolId);
+
+            ViewData["AreaId"] = new SelectList(_context.Areas.Select(a => new
+            {
+                a.Id,
+                Area = _context.AreaTypes.Where(t => t.Id == a.AreaTypeId).First().Label + ", " + a.AreaSize + " feet"
+            }).ToList(), "Id", "Area");
+
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short");
+
+            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes.Select(c => new
+            {
+                c.Id,
+                CastingTime = c.Value + " " + c.Label
+            }).ToList(), "Id", "CastingTime");
+
+            ViewData["DurationId"] = new SelectList(_context.Durations.Select(d => new
+            {
+                d.Id,
+                Duration = (from type in _context.DurationTypes
+                            where type.Id == d.DurationTypeId
+                            select (type.Value + " " + type.Label)).First()
+
+            }).ToList(), "Id", "Duration");
+
+            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes.Select(r => new
+            {
+                r.Id,
+                Range = r.Value + " " + r.Label
+            }).ToList(), "Id", "Range");
+
+            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "Id", "Label");
+
+            //ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "Id", "Label");
+            //ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Id", spell.AreaId);
+            //ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short", spell.BookId);
+            //ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes, "Id", "Label", spell.CastingTimeTypeId);
+            //ViewData["DurationId"] = new SelectList(_context.Durations, "Id", "Id", spell.DurationId);
+            //ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes, "Id", "Label", spell.RangeTypeId);
+            //ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "SchoolId", "Label", spell.SchoolId);
             return View(spell);
         }
 
@@ -117,6 +214,18 @@ namespace SpellsInfrasturcture.Controllers
             {
                 return NotFound();
             }
+
+            spell.Duration = _context.Durations.First(d => d.Id == spell.DurationId);
+            spell.Duration.DurationType = _context.DurationTypes.First(e => e.Id == spell.Duration.DurationTypeId);
+            spell.School = _context.SchoolOfMagics.First(s => s.Id == spell.SchoolId);
+            spell.Area = _context.Areas.First(e => e.Id == spell.AreaId);
+            spell.Area.AreaType = _context.AreaTypes.First(e => e.Id == spell.Area.AreaTypeId);
+            spell.Book = _context.Books.First(e => e.Id == spell.BookId);
+            spell.CastingTimeType = _context.CastingTimeTypes.First(e => e.Id == spell.CastingTimeTypeId);
+            spell.RangeType = _context.RangeTypes.First(e => e.Id == spell.RangeTypeId);
+
+            ModelState.Clear();
+            TryValidateModel(spell);
 
             if (ModelState.IsValid)
             {
@@ -138,12 +247,38 @@ namespace SpellsInfrasturcture.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Id", spell.AreaId);
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short", spell.BookId);
-            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes, "Id", "Label", spell.CastingTimeTypeId);
-            ViewData["DurationId"] = new SelectList(_context.Durations, "Id", "Id", spell.DurationId);
-            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes, "Id", "Label", spell.RangeTypeId);
-            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "SchoolId", "Label", spell.SchoolId);
+
+            ViewData["AreaId"] = new SelectList(_context.Areas.Select(a => new
+            {
+                a.Id,
+                Area = _context.AreaTypes.Where(t => t.Id == a.AreaTypeId).First().Label + ", " + a.AreaSize + " feet"
+            }).ToList(), "Id", "Area");
+
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Short");
+
+            ViewData["CastingTimeTypeId"] = new SelectList(_context.CastingTimeTypes.Select(c => new
+            {
+                c.Id,
+                CastingTime = c.Value + " " + c.Label
+            }).ToList(), "Id", "CastingTime");
+
+            ViewData["DurationId"] = new SelectList(_context.Durations.Select(d => new
+            {
+                d.Id,
+                Duration = (from type in _context.DurationTypes
+                            where type.Id == d.DurationTypeId
+                            select (type.Value + " " + type.Label)).First()
+
+            }).ToList(), "Id", "Duration");
+
+            ViewData["RangeTypeId"] = new SelectList(_context.RangeTypes.Select(r => new
+            {
+                r.Id,
+                Range = r.Value + " " + r.Label
+            }).ToList(), "Id", "Range");
+
+            ViewData["SchoolId"] = new SelectList(_context.SchoolOfMagics, "Id", "Label");
+
             return View(spell);
         }
 

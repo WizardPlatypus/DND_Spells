@@ -6,54 +6,67 @@ namespace SpellsDomain.Model;
 
 public partial class Spell : Entity
 {
+    [Display(Name = "Книга")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int BookId { get; set; }
 
+    [Display(Name = "Школа Магії")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int SchoolId { get; set; }
 
     [Display(Name = "Рівень")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int Level { get; set; }
 
     [Display(Name = "Назва")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public string Name { get; set; } = null!;
 
     [Display(Name = "Пояснення")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public string Description { get; set; } = null!;
 
     [Display(Name = "Ритуал?")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public bool Ritual { get; set; }
 
+    [Display(Name = "Активація")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int CastingTimeTypeId { get; set; }
 
+    [Display(Name = "Тривалість")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int? DurationId { get; set; }
 
+    [Display(Name = "Відстань")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int RangeTypeId { get; set; }
 
+    [Display(Name = "Площа")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int? AreaId { get; set; }
 
     [Display(Name = "V")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public bool Verbal { get; set; }
 
     [Display(Name = "S")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public bool Somatic { get; set; }
 
     [Display(Name = "M")]
+    [Required(ErrorMessage = "Поле не має бути пустим")]
     public int Material { get; set; }
 
-    [Display(Name = "Площа")]
     public virtual Area? Area { get; set; }
 
-    [Display(Name = "Книга")]
     public virtual Book Book { get; set; } = null!;
 
-    [Display(Name = "Активація")]
     public virtual CastingTimeType CastingTimeType { get; set; } = null!;
 
-    [Display(Name = "Тривалість")]
     public virtual Duration? Duration { get; set; }
 
-    [Display(Name = "Відстань")]
     public virtual RangeType RangeType { get; set; } = null!;
 
-    [Display(Name = "Школа Магії")]
     public virtual SchoolOfMagic School { get; set; } = null!;
 }
