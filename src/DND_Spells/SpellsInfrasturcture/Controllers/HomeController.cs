@@ -15,7 +15,7 @@ namespace SpellsInfrasturcture.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return new RedirectToActionResult("Index", "Spells", "");
         }
 
         public IActionResult Privacy()
